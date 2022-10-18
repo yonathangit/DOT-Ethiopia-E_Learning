@@ -13,18 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('cateory_id');
-            $table->string('title');
-            $table->longText('description');
-            $table->longText('about_instructor');
-            $table->string('playlist_url');
+            $table->string('name');
+            $table->longText('description')->nullable();
             $table->integer('view_count')->default(0);
-            $table->integer('subscriber_count')->default(0);
-            $table->integer('status')->default(0); 
-            $table->string('photo')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -37,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('categories');
     }
 };

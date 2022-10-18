@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('user_id')->nullable();
             $table->string('course_id')->nullable();
+            $table->integer('view_count')->default(0);
             $table->string('url')->nullable();
             $table->longText('description')->nullable();
             $table->softDeletes();

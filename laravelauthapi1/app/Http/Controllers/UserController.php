@@ -44,11 +44,11 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->first();
         if($user && Hash::check($request->password, $user->password)){
             $token = $user->createToken($request->email)->plainTextToken;
+            $cookie = cookie('loginjwt', $token, 60*24);
             return response([
-                'token'=>$token,
                 'message' => 'Login Success',
                 'status'=>'success'
-            ], 200);
+            ], 200)->withCookie($cookie);
         }
         return response([
             'message' => 'The Provided Credentials are incorrect',
@@ -57,11 +57,7 @@ class UserController extends Controller
     }
 
     public function logout(){
-        auth()->user()->tokens()->delete();
-        return response([
-            'message' => 'Logout Success',
-            'status'=>'success'
-        ], 200);
+        $cookie = Cookie::forget('loginjwt');
     }
     
     public function logged_user(){

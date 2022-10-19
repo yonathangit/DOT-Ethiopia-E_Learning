@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('playlist_url');
             $table->integer('view_count')->default(0);
             $table->integer('subscriber_count')->default(0);
-            $table->integer('status')->default(0); 
+            $table->string('status')->default(0); 
             $table->string('photo')->nullable();
             $table->softDeletes();
             $table->timestamps();

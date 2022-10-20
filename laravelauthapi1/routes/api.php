@@ -6,17 +6,20 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\PasswordResetController;
 
-// Public Routes
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/logout', [UserController::class, 'logout']);
 
-Route::resource('/task', TasksController::class);
-// Protected Routes
-Route::middleware(['auth:sanctum'])->group(function(){
+Route::middleware(['auth:sanctum'])->get('/user',function(Request $request){
     
     Route::get('/loggeduser', [UserController::class, 'logged_user']);
     Route::post('/changepassword', [UserController::class, 'change_password']);
+});
+// Public Routes
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+
+// Protected Routes
+Route::group(['middlwware'=>['auth:sanctum']], function(){
+    Route::resource('/task', TasksController::class);
+    Route::post('/logout', [UserController::class, 'logout']);
 });
 
 

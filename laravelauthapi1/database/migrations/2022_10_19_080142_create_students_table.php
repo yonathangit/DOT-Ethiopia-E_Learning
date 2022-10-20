@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->tinyInteger('is_subscribed')->default(0);
+            $table->foreign('user_id') ->references('id') ->on('users');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\LoginUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,14 +40,11 @@ class UserController extends Controller
         ], 201);
     }
 
-    public function login(Request $request){
-        $request->validate([
-            'email'=>'required|email',
-            'password'=>'required',
-        ]);
+    public function login(LoginUserRequest $request){
+        $request->validate($request->all());
         $user = User::where('email', $request->email)->first();
         if($user && Hash::check($request->password, $user->password)){
-            $token = $user->createToken($request->email)->plainTextToken;
+            $token = $user->createToken('api for login in ' . $user->email)->plainTextToken;
             $cookie = cookie('loginjwt', $token, 60*24);
             return response([
                 'message' => 'Login Success',

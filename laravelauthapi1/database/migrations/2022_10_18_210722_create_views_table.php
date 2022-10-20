@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('views', function (Blueprint $table) {
-          $table->increments('id');
+          $table->increments('id') ;
           $table->integer('user_id');
           $table->integer('user_account_id')->nullable();
           $table->integer('category_id')->nullable();

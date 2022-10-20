@@ -3,18 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function register(Request $request){
-        $request->validate([
-            'name'=>'required',
-            'email'=>'required|email',
-            'password'=>'required|confirmed',
-            'tc'=>'required',
-        ]);
+    public function register(StoreUserRequest $request){
+        $request->validated($request->all());
         if(User::where('email', $request->email)->first()){
             return response([
                 'message' => 'Email already exists',
@@ -23,12 +19,19 @@ class UserController extends Controller
         }
 
         $user = User::create([
-            'name'=>$request->name,
+            'firstname'=>$request->firstname,
+            'lastname'=>$request->lastname,
+            'age'=> $request->age,
+            'address'=> $request->address,
+            'gender'=> $request->gender,
+            'field_of_study'=> $request->field_of_study,
+            'level-of_study'=> $request->level_of_study,
+            'phone_number'=> $request->phone_number,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'tc'=>json_decode($request->tc),
         ]);
-        $token = $user->createToken($request->email)->plainTextToken;
+        $token = $user->createToken('api Token for' . $user->email)->plainTextToken;
         return response([
             'token'=>$token,
             'message' => 'Registration Success',

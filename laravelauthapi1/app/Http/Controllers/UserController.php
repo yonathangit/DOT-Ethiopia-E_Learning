@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+   
     public function register(Request $request){
         $request->validate([
-            'name'=>'required',
+            'firstname'=>'required',
+            'lastname'=>'required',
             'email'=>'required|email',
             'password'=>'required|confirmed',
             'tc'=>'required',

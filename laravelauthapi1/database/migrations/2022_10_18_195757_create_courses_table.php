@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('status')->default(0); 
             $table->string('photo')->nullable();
             $table->softDeletes();
-            $table->foreign('view_count') ->references('id') ->on('views');
             $table->timestamps();
         });
     }

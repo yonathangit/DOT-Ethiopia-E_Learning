@@ -30,8 +30,6 @@ return new class extends Migration
             $table->integer('role_id')->default(3);
             $table->rememberToken();
             $table->boolean('tc');
-            $table->foreign('role_id') ->references('id') ->on('roles');
-            $table->foreign('view_count') ->references('id') ->on('views');
             $table->timestamps();
         });
     }

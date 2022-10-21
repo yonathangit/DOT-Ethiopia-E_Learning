@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\TasksResource;
+use App\Models\Task;
 
 class Taskscontroller extends Controller
 {
@@ -13,7 +15,9 @@ class Taskscontroller extends Controller
      */
     public function index()
     {
-        //
+        return TasksResource::collection(
+            Task::where('user_id', Auth::user()->id)->get()
+        );
     }
 
     /**

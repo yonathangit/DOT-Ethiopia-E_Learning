@@ -20,8 +20,6 @@ return new class extends Migration
             $table->integer('user_account_id');
             $table->tinyInteger('status')->default(0);  
             $table->softDeletes();
-            $table->foreign('instructor_id') ->references('id') ->on('instructor');
-            $table->foreign('course_id') ->references('id') ->on('course');
             $table->timestamps();
         });
     }

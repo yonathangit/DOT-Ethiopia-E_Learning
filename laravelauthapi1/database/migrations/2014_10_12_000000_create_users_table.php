@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firstname')->default('male');
-            $table->string('lastname')->default('male');
+            $table->string('firstname');
+            $table->string('lastname');
             $table->string('address')->nullable();
             $table->date('date_of_birth')->nullable(); 
             $table->string('gender')->default('male'); 
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('view_count')->default(0);
-            $table->integer('role_id')->default(3);
+            $table->integer('role')->default(3); //Admin:1, instructor:2, student:3
             $table->rememberToken();
             $table->boolean('tc');
             $table->timestamps();

@@ -15,17 +15,15 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('cateory_id');
+            $table->unsignedBigInteger('cateory_id');
             $table->string('title');
             $table->longText('description');
             $table->longText('about_instructor');
-            $table->string('playlist_url');
             $table->integer('view_count')->default(0);
             $table->integer('subscriber_count')->default(0);
-            $table->string('status')->default(0); 
-            $table->string('photo')->nullable();
+            $table->string('status')->default(0);
             $table->softDeletes();
+            $table->foreign('cateory_id') ->references('id') ->on('cateory') ->onDelete('cascade');
             $table->timestamps();
         });
     }

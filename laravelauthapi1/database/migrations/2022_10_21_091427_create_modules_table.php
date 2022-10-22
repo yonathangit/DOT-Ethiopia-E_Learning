@@ -13,13 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->string("name");  //Admin:1, instructor:2, student:3
+            $table->unsignedBigInteger('course_id');
+            $table->string('name');
+            $table->string('youtube url')->nullable();
+            $table->string('notes');
+            $table->string('pictures')->nullable();
+            $table->foreign('course_id') ->references('id') ->on('course') ->onDelete('cascade');
             $table->timestamps();
         });
     }
- 
+
     /**
      * Reverse the migrations.
      *
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('modules');
     }
 };

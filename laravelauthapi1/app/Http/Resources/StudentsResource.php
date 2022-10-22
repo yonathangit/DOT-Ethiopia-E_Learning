@@ -19,7 +19,8 @@ class StudentsResource extends JsonResource
             'type' => 'Students',
             'attributes' => [
                 'firstname' => $this->firstname,
-                'lastname' => $this->lastname,                
+                'lastname' => $this->lastname,
+                'email'=>$this->email,                
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at
             ]

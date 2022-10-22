@@ -11,7 +11,9 @@ class StudentsController extends Controller
 {
     public function update (StudentsRequest $request, Student $student){
         $student->update([
-            'name' => $request->input('name')  
+            'firstname' => $request->input('firstname'),
+            'lastname' => $request->input('lastname'),
+            'email' => $request->input('email')  
         ]);
        
         return new StudentsResource($student);
@@ -26,7 +28,9 @@ class StudentsController extends Controller
 
     public function store(Request $request){
        $student = Student::create([
-        'name' => $request->name
+        'firstname' => $request->input('firstname'),
+        'lastname' => $request->input('lastname'),
+        'email' => $request->input('email')  
        ]);
 
        return new StudentsResource($student);

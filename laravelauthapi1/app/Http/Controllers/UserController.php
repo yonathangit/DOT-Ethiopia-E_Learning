@@ -25,7 +25,8 @@ class UserController extends Controller
         }
 
         $user = User::create([
-            'name'=>$request->name,
+            'firstname'=>$request->firstname,
+            'lastname'=>$request->lastname,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'tc'=>json_decode($request->tc),
@@ -59,7 +60,6 @@ class UserController extends Controller
     }
 
     public function logout(){
-        auth()->user()->tokens()->delete();
         return response([
             'message' => 'Logout Success',
             'status'=>'success'
@@ -81,7 +81,6 @@ class UserController extends Controller
         ]);
         $loggeduser = auth()->user();
         $loggeduser->password = Hash::make($request->password);
-        $loggeduser->save();
         return response([
             'message' => 'Password Changed Successfully',
             'status'=>'success'

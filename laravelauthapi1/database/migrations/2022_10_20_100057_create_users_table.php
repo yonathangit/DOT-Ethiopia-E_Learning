@@ -17,12 +17,11 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->integer('age');
             $table->string('address')->nullable();
-            $table->date('date_of_birth'); 
-            $table->string('gender'); 
-            $table->string('field_of_study');
-            $table->bigInteger('phone_number');
+            $table->date('date_of_birth')->nullable(); 
+            $table->string('gender')->default('male'); 
+            $table->string('field_of_study')->nullable();
+            $table->bigInteger('phone_number')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

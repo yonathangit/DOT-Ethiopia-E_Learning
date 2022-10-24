@@ -14,12 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->nullable();
-            $table->string('course_id')->nullable();
-            $table->integer('view_count')->default(0);
-            $table->string('url')->nullable();
+            $table->id();
+            $table->string('name');
             $table->longText('description')->nullable();
+            $table->string('url')->nullable();
+            $table->unsignedBigInteger('course_id');
+            $table->string('course_name');
+            $table->foreign('course_id')
+                  ->references('id')
+                  ->on('courses')
+                  ->cascade('delete');
+            $table->foreign('course_name')
+                  ->references('title')
+                  ->on('courses')
+                  ->cascade('delete');
+            $table->integer('view_count')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

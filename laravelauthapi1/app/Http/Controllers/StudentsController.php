@@ -33,6 +33,8 @@ class StudentsController extends Controller
 
     public function destroy(Student $student){
         $student->delete();
-        return response(null, 204);
+        return response([
+            'message' => 'student information deleted!'
+        ], 204);
     }
 }

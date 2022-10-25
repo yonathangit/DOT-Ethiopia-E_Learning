@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('cateory_id');
+            $table->unsignedBigInteger('category_id');
             $table->string('title');
             $table->longText('description');
             $table->longText('about_instructor');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('subscriber_count')->default(0);
             $table->string('status')->default(0);
             $table->softDeletes();
-            $table->foreign('cateory_id') ->references('id') ->on('cateory') ->onDelete('cascade');
+            $table->foreign('category_id') ->references('id') ->on('categories') ->onDelete('cascade');
             $table->timestamps();
         });
     }

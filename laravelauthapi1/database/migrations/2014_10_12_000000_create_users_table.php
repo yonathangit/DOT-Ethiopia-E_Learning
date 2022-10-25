@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('view_count')->default(0);
             $table->integer('role')->default(3); //Admin:1, instructor:2, student:3
+            $table->string('profile_picture');
             $table->rememberToken();
             $table->boolean('tc');
             $table->timestamps();

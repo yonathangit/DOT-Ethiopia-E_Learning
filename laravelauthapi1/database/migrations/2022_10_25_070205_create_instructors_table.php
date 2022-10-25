@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('instructor', function (Blueprint $table) {
+        Schema::create('instructors', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('area_of_expertise');
+            $table->integer('role')->default(2);
+            $table->foreign('user_id') ->references($Instructor->id) ->on('InstructorController') ->onDelete('cascade');
+            $table->foreign('role') ->references('role') ->on('user') ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('instructor');
+        Schema::dropIfExists('instructors');
     }
 };

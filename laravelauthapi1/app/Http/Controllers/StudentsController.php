@@ -9,6 +9,7 @@ use App\Http\Resources\StudentsResource;
 
 class StudentsController extends Controller
 {
+    
     public function update (StudentsRequest $request, Student $student){
         $student->update([
             'firstname' => $request->input('firstname'),

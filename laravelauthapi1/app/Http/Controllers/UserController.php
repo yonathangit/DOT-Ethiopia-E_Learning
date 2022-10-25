@@ -22,8 +22,8 @@ class UserController extends Controller
         $user = User::create([
             'firstname'=>$request->firstname,
             'lastname'=>$request->lastname,
-            'age'=> $request->age,
             'address'=> $request->address,
+            'date_of_birth'=>$request->date_of_birth,
             'gender'=> $request->gender,
             'field_of_study'=> $request->field_of_study,
             'level-of_study'=> $request->level_of_study,

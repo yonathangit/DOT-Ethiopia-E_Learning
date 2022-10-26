@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Module;
 use Illuminate\Http\Request;
+use App\Http\Resources\ModulesResource;
 
 class ModulesController extends Controller
 {
@@ -12,6 +13,14 @@ class ModulesController extends Controller
             'description' => $request->description
            ]);
     
-           return new StudentsResource($student);
+           return new ModulesResource($module);
+    }
+    public function update (Request $request, Module $module){
+        $module->update([
+            'name' => $request->name,
+            'description' => $request->description  
+        ]);
+       
+        return new ModulesResource($module);
     }
 }

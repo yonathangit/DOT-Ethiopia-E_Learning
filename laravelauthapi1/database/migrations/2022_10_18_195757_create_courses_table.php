@@ -14,18 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id')->default(0);
-            $table->integer('cateory_id')->default(0);
-            $table->string('title')->default(0);
-            $table->longText('description')->default(0);
-            $table->longText('about_instructor')->default(0);
-            $table->string('playlist_url')->default(0);
+            $table->increments('id');
+            $table->unsignedInteger('category_id');
+            $table->string('title');
+            $table->longText('description');
+            $table->longText('about_instructor');
             $table->integer('view_count')->default(0);
             $table->integer('subscriber_count')->default(0);
-            $table->integer('status')->default(0); 
-            $table->string('photo')->nullable();
+            $table->string('status')->default(0);
             $table->softDeletes();
+            $table->foreign('category_id') ->references('id') ->on('categories') ->onDelete('cascade');
             $table->timestamps();
         });
     }

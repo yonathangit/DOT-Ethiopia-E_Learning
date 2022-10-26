@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('course_id')->nullable();
-            $table->integer('category_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('course_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
             $table->longText('body');
             $table->softDeletes();
+
+            $table->foreign('user_id') ->references('id') ->on('users') ->onDelete('cascade');
+            $table->foreign('category_id') ->references('id') ->on('categories') ->onDelete('cascade');
+            $table->foreign('course_id') ->references('id') ->on('courses') ->onDelete('cascade');
             $table->timestamps();
         });
     }

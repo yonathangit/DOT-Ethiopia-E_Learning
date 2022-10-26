@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('course_user', function (Blueprint $table) {
+        Schema::create('course_student', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('course_id');
+            $table->unsignedBigInteger('student_id');
+            $table->unsignedInteger('course_id');
             $table->integer('user_account_id');
-            $table->tinyInteger('status')->default(0);  
+            $table->tinyInteger('status')->default(0);
             $table->softDeletes();
+            $table->foreign('student_id') ->references('id') ->on('students') ->onDelete('cascade');
+            $table->foreign('course_id') ->references('id') ->on('courses') ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_user');
+        Schema::dropIfExists('course_student');
     }
 };

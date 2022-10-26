@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('instructors', function (Blueprint $table) {
+            $table->id();
             $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('course_id')->nullable();
-            $table->integer('view_count')->default(0);
-            $table->string('url')->nullable();
-            $table->longText('description')->nullable();
-            $table->softDeletes();
+            $table->string('area_of_expertise');
+
+            $table->integer('role')->default(2);
             $table->foreign('user_id') ->references('id') ->on('users') ->onDelete('cascade');
-            $table->foreign('course_id') ->references('id') ->on('courses') ->onDelete('cascade');
+            // $table->foreign('role') ->references('role') ->on('user') ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('instructors');
     }
 };

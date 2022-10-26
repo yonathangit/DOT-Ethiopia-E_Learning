@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('course_id')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('course_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
             $table->longText('body');
             $table->softDeletes();
-            $table->foreign('user_id') ->references('id') ->on('user') ->onDelete('cascade');
+
+            $table->foreign('user_id') ->references('id') ->on('users') ->onDelete('cascade');
             $table->foreign('category_id') ->references('id') ->on('categories') ->onDelete('cascade');
-            $table->foreign('course_id') ->references('id') ->on('course') ->onDelete('cascade');
+            $table->foreign('course_id') ->references('id') ->on('courses') ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('course_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('course_id')->nullable();
             $table->integer('view_count')->default(0);
             $table->string('url')->nullable();
             $table->longText('description')->nullable();
             $table->softDeletes();
-            $table->foreign('user_id') ->references('id') ->on('user') ->onDelete('cascade');
-            $table->foreign('course_id') ->references('id') ->on('course') ->onDelete('cascade');
+            $table->foreign('user_id') ->references('id') ->on('users') ->onDelete('cascade');
+            $table->foreign('course_id') ->references('id') ->on('courses') ->onDelete('cascade');
             $table->timestamps();
         });
     }

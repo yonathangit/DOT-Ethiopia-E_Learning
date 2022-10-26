@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('course_instructor', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('instructor_id');
-            $table->unsignedBigInteger('course_id');
+            $table->unsignedInteger('course_id');
             $table->integer('user_account_id');
-            $table->tinyInteger('status')->default(0);  
+            $table->tinyInteger('status')->default(0);
             $table->softDeletes();
-            $table->foreign('instructor_id') ->references('id') ->on('instructor') ->onDelete('cascade');
-            $table->foreign('course_id') ->references('id') ->on('course') ->onDelete('cascade');
+            $table->foreign('instructor_id') ->references('id') ->on('instructors') ->onDelete('cascade');
+            $table->foreign('course_id') ->references('id') ->on('courses') ->onDelete('cascade');
             $table->timestamps();
         });
     }

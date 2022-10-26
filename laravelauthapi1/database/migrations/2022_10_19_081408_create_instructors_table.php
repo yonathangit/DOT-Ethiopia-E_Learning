@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('instructors', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->string('area_of_expertise');
             $table->integer('role')->default(2);
-            $table->foreign('user_id') ->references($Instructor->id) ->on('InstructorController') ->onDelete('cascade');
-            $table->foreign('role') ->references('role') ->on('user') ->onDelete('cascade');
+            $table->foreign('user_id') ->references('id') ->on('users') ->onDelete('cascade');
+            // $table->foreign('role') ->references('role') ->on('user') ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -17,10 +17,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('user_id')->nullable();
             $table->string('area_of_expertise');
-<<<<<<< HEAD
-
-=======
->>>>>>> ba2a9a571c11f5b8b536f0a0a32be86772368c96
             $table->integer('role')->default(2);
             $table->foreign('user_id') ->references('id') ->on('users') ->onDelete('cascade');
             // $table->foreign('role') ->references('role') ->on('user') ->onDelete('cascade');

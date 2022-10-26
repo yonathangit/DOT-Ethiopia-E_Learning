@@ -23,4 +23,16 @@ class ModulesController extends Controller
        
         return new ModulesResource($module);
     }
+    public function index(Request $request){
+        return ModulesResource::collection(Module::all()); 
+     }
+     public function show(Module $module){
+        return new ModulesResource($module);
+    }
+    public function destroy(Module $module){
+        $module->delete();
+        return response([
+            'message' => 'Module information deleted!'
+        ], 204);
+    }
 }

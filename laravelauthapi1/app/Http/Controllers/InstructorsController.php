@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instructor;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\InstructorsRequest;
 use App\Http\Resources\InstructorsResource;
@@ -14,8 +15,6 @@ class InstuctorsController extends Controller
     {
         return InstructorsResource::collection(Instructor::all());
     }
-
-    
 
     
     public function store(Request $request)
@@ -33,11 +32,16 @@ class InstuctorsController extends Controller
             'password'=>Hash::make($request->password),
             'tc'=>json_decode($request->tc), 
         ]);
+
+          Instructor::create([
+                'user_id' => $instructor->id,
+          ]);
     
+          return new InstructorsResource($Instructor);
     }
 
     
-    public function show($Instructor)
+    public function show(Instructor $Instructor)
     {
         return new InstructorsResource($Instructor);
     }

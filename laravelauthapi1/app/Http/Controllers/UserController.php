@@ -2,105 +2,95 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\LoginUserRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-<<<<<<< HEAD
-   
-    public function register(Request $request){
-        $request->validate([
-            'firstname'=>'required',
-            'lastname'=>'required',
-            'email'=>'required|email',
-            'password'=>'required|confirmed',
-            'tc'=>'required',
-        ]);
-=======
-    public function register(StoreUserRequest $request){
-        $request->validated($request->all());
->>>>>>> ba2a9a571c11f5b8b536f0a0a32be86772368c96
-        if(User::where('email', $request->email)->first()){
-            return response([
-                'message' => 'Email already exists',
-                'status'=>'failed'
-            ], 200);
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login','register']]);
+    }
+
+    /**
+     * Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login()
+    {
+        $credentials = request(['email', 'password']);
+
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $user = User::create([
-            'firstname'=>$request->firstname,
-            'lastname'=>$request->lastname,
-<<<<<<< HEAD
-=======
-            'address'=> $request->address,
-            'date_of_birth'=>$request->date_of_birth,
-            'gender'=> $request->gender,
-            'field_of_study'=> $request->field_of_study,
-            'level-of_study'=> $request->level_of_study,
-            'phone_number'=> $request->phone_number,
->>>>>>> ba2a9a571c11f5b8b536f0a0a32be86772368c96
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password),
-            'tc'=>json_decode($request->tc),
+        return $this->respondWithToken($token);
+    }
+
+    public function register()
+    {
+        $credentials = request(['firstname', 'lastname','email', 'password']);
+        $credentials['password'] = bcrypt($credentials['password']);
+        User::create($credentials);
+
+        return response()->json('success');
+    }
+
+
+
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
+    {
+        return response()->json(auth()->user());
+    }
+
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()
         ]);
-        $token = $user->createToken('api Token for' . $user->email)->plainTextToken;
-        return response([
-            'token'=>$token,
-            'message' => 'Registration Success',
-            'status'=>'success'
-        ], 201);
-    }
-
-    public function login(LoginUserRequest $request){
-        $request->validate($request->all());
-        $user = User::where('email', $request->email)->first();
-        if($user && Hash::check($request->password, $user->password)){
-            $token = $user->createToken('api for login in ' . $user->email)->plainTextToken;
-            $cookie = cookie('loginjwt', $token, 60*24);
-            return response([
-                'message' => 'Login Success',
-                'status'=>'success'
-            ], 200)->withCookie($cookie);
-        }
-        return response([
-            'message' => 'The Provided Credentials are incorrect',
-            'status'=>'failed'
-        ], 401);
-    }
-
-    public function logout(){
-<<<<<<< HEAD
-        return response([
-            'message' => 'Logout Success',
-            'status'=>'success'
-        ], 200);
-=======
-        $cookie = Cookie::forget('loginjwt');
->>>>>>> ba2a9a571c11f5b8b536f0a0a32be86772368c96
-    }
-    
-    public function logged_user(){
-        $loggeduser = auth()->user();
-        return response([
-            'user'=>$loggeduser,
-            'message' => 'Logged User Data',
-            'status'=>'success'
-        ], 200);
-    }
-
-    public function change_password(Request $request){
-        $request->validate([
-            'password' => 'required|confirmed',
-        ]);
-        $loggeduser = auth()->user();
-        $loggeduser->password = Hash::make($request->password);
-        return response([
-            'message' => 'Password Changed Successfully',
-            'status'=>'success'
-        ], 200);
     }
 }

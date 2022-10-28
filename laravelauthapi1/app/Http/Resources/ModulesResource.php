@@ -16,7 +16,7 @@ class ModulesResource extends JsonResource
     {
         return [
             'id' => (string)$this->id,
-            'type' => 'Modules',
+            'type' => 'Module',
             'attributes' => [
                 'name' => $this->name,
                 'description' => $this->description,

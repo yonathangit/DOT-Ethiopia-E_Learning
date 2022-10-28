@@ -1,0 +1,102 @@
+.testimonyHeader{
+  margin: 20px auto 30px auto;
+}
+.ourCoursesContainer {
+  /* height: 100vh; */
+  width: 100%;
+  background-color:white ;
+  text-align: center;
+  padding: 40px;
+  color: black;
+  margin: auto auto 50px auto;
+}
+.OurCoursesInnerContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.promoSection{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 20px;
+  height: 80px;
+  background-color: orange;
+  border: #202232 solid 2px;
+  border-radius: 10px;
+}
+
+.ourCoursesHeading {
+  color: black;
+  background-color: black;
+  width: 300px;
+  height: 50px;
+  font-size: x-large;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  margin: 10px auto;
+}
+
+.ourCoursesHeading:hover{
+  background-color: orange;
+  color: white;
+}
+
+.exploreCourses h1{
+  margin: 20px auto;
+  font-weight: bolder;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.enrollContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  justify-items: center;
+  text-align: center;
+  /* align-items: center; */
+}
+
+.courseCard{
+  background-color: #EDEDED;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+  border-radius: 10px;
+  height: 350px;
+  max-height: 350px;
+  max-width: 300px;
+  border: rgb(177, 177, 177) 5px solid;
+  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+}
+/* 
+.courseCard:hover{
+  border: white 3px solid;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+} */
+
+.courseCard img{
+  width: 250px;
+  height: 200px;
+  border-radius: 5px;
+  /* margin: auto 10px; */
+}
+
+.cardDescription h3{
+  max-width: 250px;
+  margin:  auto;
+  font-weight: bolder;
+  font-size: larger;
+
+}
+
+.testimonyMessageStyle{
+  max-width: 250px;
+  font-weight: bold;
+  /* font-size: small; */
+}

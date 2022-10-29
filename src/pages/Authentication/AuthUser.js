@@ -29,6 +29,7 @@ export default function AuthUser(){
 
         setToken(token);
         setUser(user);
+        console.log("I'm logged in");
         navigate('/dashboard');
     }
 

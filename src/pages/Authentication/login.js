@@ -38,7 +38,7 @@ import AuthUser from './AuthUser';
 //     )
 // }
 import { useState } from 'react';
-import { Modal,TextInput, Box, Button } from '@mantine/core';
+import { Modal,TextInput, PasswordInput, Box, Button } from '@mantine/core';
 export default function Login() {
         const {http,setToken} = AuthUser();
         const [email,setEmail] = useState();
@@ -64,7 +64,7 @@ export default function Login() {
           placeholder="Email"
           onChange={e=>setEmail(e.target.value)}
         />
-        <TextInput
+        <PasswordInput
           label="Password"
           placeholder="Password"
           mt="md"

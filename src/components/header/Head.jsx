@@ -21,8 +21,8 @@ const Head = () => {
           </div>
 
           <div className={classes.SocialLinks}>
-            <Link to="/" class="fab fa-linkedin icon"></Link>
-            <Link to="/" class="fab fa-facebook icon"></Link>
+            <Link to="/" className="fab fa-linkedin icon"></Link>
+            <Link to="/" className="fab fa-facebook icon"></Link>
             <Link to="/" className="fab fa-instagram icon"></Link>
             <Link to="/" className="fab fa-twitter icon"></Link>
             <Link to="/" className="fab fa-youtube icon"></Link>

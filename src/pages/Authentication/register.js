@@ -61,7 +61,7 @@ export default function Register() {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Welcome, Please enter your information in the provided area"
+        title="Welcome"
       >
         <Box sx={{ maxWidth: 400 }} mx="auto">
         <TextInput

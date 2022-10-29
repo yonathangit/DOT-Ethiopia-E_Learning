@@ -8,21 +8,20 @@ import Registration from "./pages/Authentication/register";
 import Courses from "./pages/Coursespage/Courses";
 import Login from "./pages/Authentication/login";
 import About from "./pages/Aboutpage/About";
-import Dashboard from '../src/pages/Authentication/dashboard';
+import Dashboard from "./pages/Authentication/dashboard";
 
 function App() {
     return(
       <Router>
         <Header />
-        <Home />
+        
         <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/Coursespage" element={<Courses />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/Aboutpage" element={<About />} />
-        <Route path="/register" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/Coursespage" element={<Courses />} />
+        <Route exact path="/Aboutpage" element={<About />} />
+        <Route exact path="/dashboard" element={<Dashboard />}  />
+        <Route exact path="/register" element={<Registration />} />
+        <Route exact path="/login" element={<Login />} />
          </Routes>
          <Footer />
       </Router>

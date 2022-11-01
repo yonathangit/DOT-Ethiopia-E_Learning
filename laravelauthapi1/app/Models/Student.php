@@ -16,6 +16,9 @@ class Student extends Model
         'email',
     ];
     
+    public function user(){
+        return $this->belongsTo(User::class,'id');
+    }
     
     public function enrolling(){
         return $this->belongsToMany(Course::class);

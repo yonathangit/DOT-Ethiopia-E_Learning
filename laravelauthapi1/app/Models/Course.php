@@ -23,7 +23,7 @@ class Course extends Model
         'updated_at'
     ];
 
-    public function enrolled(){
+    public function enrollers(){
         return $this->belongsToMany(Student::class);
     }
 }

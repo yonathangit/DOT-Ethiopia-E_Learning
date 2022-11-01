@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('course_enroll_status', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('course_id')->nullable();
             $table->string('name');
-            $table->string('youtube url')->nullable();
-            $table->string('notes')->nullable();
-            $table->string('pictures')->nullable();
-            $table->foreign('course_id') ->references('id') ->on('courses') ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('course_enroll_status');
     }
 };

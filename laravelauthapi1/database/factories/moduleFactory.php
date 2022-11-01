@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 
  
-class moduleFactory extends Factory
+class ModuleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class moduleFactory extends Factory
     {
         return [
            'name' => $this->faker->name,
-           'description' => $this->faker->sentence
+           'notes' => 'abebe beso bela chala chube chebete!'
         ];
     }
 }

@@ -10,7 +10,7 @@ class ModulesController extends Controller
     public function store(Request $request){
         $module = Module::create([
             'name' => $request->name,
-            'description' => $request->description
+            'notes' => $request->notes
            ]);
     
            return new ModulesResource($module);
@@ -18,7 +18,7 @@ class ModulesController extends Controller
     public function update (Request $request, Module $module){
         $module->update([
             'name' => $request->name,
-            'description' => $request->description  
+            'notes' => $request->notes  
         ]);
        
         return new ModulesResource($module);

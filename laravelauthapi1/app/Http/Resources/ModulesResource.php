@@ -19,7 +19,7 @@ class ModulesResource extends JsonResource
             'type' => 'Module',
             'attributes' => [
                 'name' => $this->name,
-                'description' => $this->description,
+                'notes' => $this->notes,
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at
         ]

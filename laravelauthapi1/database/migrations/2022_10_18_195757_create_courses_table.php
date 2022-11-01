@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('category_id')->nullable();
             $table->string('title');
             $table->longText('description');
-            $table->longText('about_instructor');
+            $table->longText('about_instructor')->nullable();
             $table->integer('view_count')->default(0);
             $table->integer('subscriber_count')->default(0);
             $table->string('status')->default(0);

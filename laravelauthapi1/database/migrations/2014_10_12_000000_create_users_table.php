@@ -27,7 +27,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('view_count')->default(0);
-            $table->integer('role')->default(3); //Admin:1, instructor:2, student:3
+            $table->unsignedBigInteger('role')->default(3); //Admin:1, instructor:2, student:3
+            $table->foreign('role') ->references('id') ->on('roles') ->onDelete('cascade');
             $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->boolean('tc')->nullable();

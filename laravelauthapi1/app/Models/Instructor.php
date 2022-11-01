@@ -14,4 +14,5 @@ class Instructor extends Model
         'lastname',
         'email',
     ];
+    
 }

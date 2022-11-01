@@ -15,4 +15,10 @@ class Student extends Model
         'lastname',
         'email',
     ];
+    
+    
+    public function enrolling(){
+        return $this->belongsToMany(Course::class);
+    }
+
 }

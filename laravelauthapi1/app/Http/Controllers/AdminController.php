@@ -51,7 +51,7 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
+    public function adminlogout()
     {
         auth()->guard('admin-api')->logout();
 

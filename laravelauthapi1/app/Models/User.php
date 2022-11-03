@@ -29,7 +29,8 @@ class User extends Authenticatable implements JWTSubject
         'level_of_study',
         'email',
         'password',
-        'profile_picture'
+        'profile_picture',
+        'role'
     ];
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'role' => \App\Enum\UserRoleEnum::class
     ];
 
     public function getJWTIdentifier()

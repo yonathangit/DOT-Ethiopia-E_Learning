@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Student;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\UsersResource;
+use App\Http\Requests\StudentsRequest;
+use App\Http\Resources\StudentsResource;
+
 
 class UserController extends Controller
 {
@@ -23,6 +30,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+
+
+
     public function login()
     {
         $credentials = request(['email', 'password']);
@@ -34,13 +44,67 @@ class UserController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function register()
-    {
-        $credentials = request(['firstname', 'lastname','email', 'password']);
-        $credentials['password'] = bcrypt($credentials['password']);
-        User::create($credentials);
 
-        return response()->json('success');
+
+
+    public function update (StudentsRequest $request, User $user){
+        $user->update([
+            'firstname' => $request->input('firstname'),
+            'lastname' => $request->input('lastname'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password')  
+        ]);
+       
+        return new StudentsResource($user);
+    }
+
+
+
+
+    public function destroy(User $user){
+        $user->delete();
+        return response("Deleted", 204);
+    }
+    public function show(User $user){
+        return new StudentsResource($user);
+    }
+
+
+
+
+    public function index(){
+          $students = DB::table('users')
+                         ->join('students', 'users.id', '=', 'students.user_id')
+                         ->select('users.*')
+                         ->get();
+          
+           return new StudentsResource($students); 
+
+    }
+
+
+    public function register(Request $request)
+    {
+         $credentials = $request->password;
+         $credentials = bcrypt($credentials);  
+         $user = User::create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'password' =>  $credentials,
+            'role'=> \App\Enum\UserRoleEnum::STUDENT
+        ]);
+       
+
+        Student::create([
+            'user_id' => $user->id
+        ]);
+
+        
+        return response()->json([
+            'message' => 'Successfully Registered',
+            'user_id' => $user->id
+            ]);
     }
 
 

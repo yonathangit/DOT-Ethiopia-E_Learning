@@ -14,8 +14,10 @@ class Instructor extends Model
         'lastname',
         'email',
     ];
-    
-    public function user(){
-        return $this->belongsTo(User::class);
+
+    public function user() {
+        return $this->morphOne(User::class, 'userable');
     }
+    
+   
 }

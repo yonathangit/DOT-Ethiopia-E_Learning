@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users') ->onDelete('cascade');
+            $table->string('firstname');
+            $table->string('lastname');
             $table->tinyInteger('is_subscribed')->default(0);
             $table->timestamps();
         });

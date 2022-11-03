@@ -30,7 +30,8 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'profile_picture',
-        'role'
+        'userable_id',
+        'userable_type'
     ];
 
     /**
@@ -50,7 +51,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'role' => \App\Enum\UserRoleEnum::class
+        'userable_type' => \App\Enum\UserRoleEnum::class
     ];
 
     public function getJWTIdentifier()
@@ -68,11 +69,9 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function student(){
-        return $this->hasOne(Student::class,'user_id');
-
-    }
-    public function instructor(){
-        return $this->hasOne(Instructor::class,'userr_id');
+    
+    public function userable()
+    {
+        return $this->morphTo();
     }
 }

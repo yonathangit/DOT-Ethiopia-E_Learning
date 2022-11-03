@@ -14,4 +14,9 @@ class Module extends Model
         'name',
         'notes'
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

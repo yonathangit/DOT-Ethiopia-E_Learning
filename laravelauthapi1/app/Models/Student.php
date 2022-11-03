@@ -11,18 +11,16 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'id',
         'firstname',
-        'lastname',
-        'email',
+        'lastname'
     ];
-    
-    public function user(){
-        return $this->belongsTo(User::class,'id');
+    public function user() {
+        return $this->morphOne(User::class, 'userable');
     }
     
-    public function enrolling(){
-        return $this->belongsToMany(Course::class);
+    public function courses(){
+        return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id');
     }
 
 }

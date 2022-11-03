@@ -27,7 +27,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('view_count')->default(0);
-            $table->string('role');
+            $table->unsignedInteger('userable_id')->nullable();
+            $table->string('userable_type');
             $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->boolean('tc')->nullable();

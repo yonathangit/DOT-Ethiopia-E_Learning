@@ -78,7 +78,9 @@ class UserController extends Controller
                          ->select('users.*')
                          ->get();
           
-           return new StudentsResource($students); 
+          response()->json([
+            $students->toArray()
+          ]);
 
     }
 
@@ -92,18 +94,24 @@ class UserController extends Controller
             'lastname' => $request->lastname,
             'email' => $request->email,
             'password' =>  $credentials,
-            'role'=> \App\Enum\UserRoleEnum::STUDENT
+            'userable_type'=> \App\Enum\UserRoleEnum::STUDENT
         ]);
        
 
         Student::create([
-            'user_id' => $user->id
+            'id' => $user->id,
+            'firstname' => $user->firstname,
+            'lastname' => $user->lastname
         ]);
 
         
         return response()->json([
-            'message' => 'Successfully Registered',
-            'user_id' => $user->id
+            'Message' => 'Successfully Registered',
+            'Firstname' => $user->firstname,
+            'Lastname' => $user->lastname,
+            'Email' => $user->email,
+            'Password' => $user->password,
+
             ]);
     }
 

@@ -23,7 +23,7 @@ class Student extends Authenticatable implements JWTSubject
     
     public function courses(){
         return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id')
-                    ->withPivot('status', 'module_id')
+                    ->withPivot('status')
                     ->withTimestamps();
     }
 

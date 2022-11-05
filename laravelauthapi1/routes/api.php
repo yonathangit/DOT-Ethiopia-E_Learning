@@ -40,9 +40,9 @@ Route::group([
     
 
 ], function () {
-   
     Route::post('studentlogout', [StudentsController::class, 'studentlogout'])->name('studentlogout');
     Route::post('studme', [StudentsController::class, 'me']);
+    Route::post('enroll', [EnrollmentController::class, 'enroll'])->name('enrollment');
 
 });
 

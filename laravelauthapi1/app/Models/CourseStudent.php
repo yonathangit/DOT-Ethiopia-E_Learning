@@ -13,7 +13,9 @@ class CourseStudent extends Pivot
     protected $fillable = [
         'student_id',
         'course_id',
-        'status'
+        'status',
+        'created_at',
+        'updated_at'
     ];
     protected $casts = [
         'status' => \App\Enum\CourseEnrollEnum::class

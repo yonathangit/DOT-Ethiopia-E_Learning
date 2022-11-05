@@ -24,7 +24,8 @@ class CoursesController extends Controller
     }
     public function store(Request $request){
        $course = Course::create([
-         'title' => $request->title 
+         'title' => $request->title, 
+         'description' => $request->description
        ]);
        
        return new CoursesResource($course);

@@ -44,6 +44,14 @@ return [
             'driver' => 'jwt',
             'provider' => 'admins',
         ],
+        'instructor-api' => [
+            'driver' => 'jwt',
+            'provider' => 'instructors',
+        ],
+        'student-api' => [
+            'driver' => 'jwt',
+            'provider' => 'students',
+        ]  
     ],
 
     /*
@@ -62,7 +70,6 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
@@ -72,6 +79,15 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
+        'instructors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Instructor::class,
+        ],
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',

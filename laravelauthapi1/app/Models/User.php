@@ -19,20 +19,8 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'firstname',
-        'lastname',
-        'address',
-        'date_of_birth',
-        'gender',
-        'field_of_study',
-        'level_of_study',
-        'email',
-        'password',
-        'profile_picture',
-        'userable_id',
-        'userable_type'
-    ];
+   
+     protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -51,7 +39,6 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'userable_type' => \App\Enum\UserRoleEnum::class
     ];
 
     public function getJWTIdentifier()

@@ -17,6 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('field_of_study')->nullable();
+            $table->string('level_of_study')->nullable();
+            $table->string('address')->nullable();
+            $table->date('date_of_birth')->nullable(); 
+            $table->string('gender')->default('male'); 
+            $table->bigInteger('phone_number')->nullable();
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->tinyInteger('is_subscribed')->default(0);
             $table->timestamps();
         });

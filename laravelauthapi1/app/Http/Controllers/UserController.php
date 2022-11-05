@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\UsersResource;
 use App\Http\Requests\StudentsRequest;
 use App\Http\Resources\StudentsResource;
 
@@ -22,7 +21,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login','studentRegister']]);
     }
 
     /**
@@ -85,34 +84,44 @@ class UserController extends Controller
     }
 
 
-    public function register(Request $request)
+    public function studentRegister(Request $request)
     {
-         $credentials = $request->password;
-         $credentials = bcrypt($credentials);  
-         $user = User::create([
+        $student = Student::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'password' =>  $credentials,
-            'userable_type'=> \App\Enum\UserRoleEnum::STUDENT
-        ]);
-       
-
-        Student::create([
-            'id' => $user->id,
-            'firstname' => $user->firstname,
-            'lastname' => $user->lastname
+            'password' =>  Hash::make($request->password),
         ]);
 
-        
-        return response()->json([
-            'Message' => 'Successfully Registered',
-            'Firstname' => $user->firstname,
-            'Lastname' => $user->lastname,
-            'Email' => $user->email,
-            'Password' => $user->password,
+        $student->users()->create();
 
-            ]);
+        if($student){
+            return response()->json([
+                $student, 'status'=>true
+            ]);  
+        }else{
+            return response()->json(['status'=>false]);
+        }
+    }
+
+    public function instructorRegister(Request $request)
+    {
+        // $instructor = Student::create([
+        //     'firstname' => $request->firstname,
+        //     'lastname' => $request->lastname,
+        //     'email' => $request->email,
+        //     'password' =>  Hash::make($request->password),
+        // ]);
+
+        // $student->users()->create();
+
+        // if($student){
+        //     return response()->json([
+        //         $student, 'status'=>true
+        //     ]);  
+        // }else{
+        //     return response()->json(['status'=>false]);
+        // }
     }
 
 

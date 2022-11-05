@@ -15,9 +15,16 @@ return new class extends Migration
     {
         Schema::create('instructors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('firstname');
+            $table->string('lastname');
             $table->string('area_of_expertise')->nullable();
-            $table->integer('role')->default(2);
+            $table->string('gender')->default('male'); 
+            $table->string('address')->nullable();
+            $table->date('date_of_birth')->nullable(); 
+            $table->bigInteger('phone_number')->nullable();
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->timestamps();
         });
     }

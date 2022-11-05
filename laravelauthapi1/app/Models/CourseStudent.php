@@ -13,7 +13,6 @@ class CourseStudent extends Pivot
     protected $fillable = [
         'student_id',
         'course_id',
-        'module_id',
         'status'
     ];
     protected $casts = [

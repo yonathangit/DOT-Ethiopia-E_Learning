@@ -17,7 +17,6 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('student_id');
             $table->unsignedInteger('course_id');
-            $table->integer('module_id');
             $table->string('status');
             $table->softDeletes();
             $table->foreign('student_id') ->references('id') ->on('students') ->onDelete('cascade');

@@ -11,6 +11,9 @@ class Module extends Model
     protected $table = "modules";
 
     protected $fillable = [
+        'course_id',
+        'pictures',
+        'youtube url',
         'name',
         'notes'
     ];

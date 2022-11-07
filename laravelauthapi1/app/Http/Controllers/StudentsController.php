@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rules;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -12,6 +13,13 @@ use App\Http\Resources\StudentsResource;
 class StudentsController extends Controller
 {
     public function studentregister(Request $request){
+        $request->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:students'],
+            'password' => ['required', Password::defaults()],
+        ]);
+        
         $student = Student::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -30,7 +38,10 @@ class StudentsController extends Controller
         }
     }
     public function studentlog(Request $request){
-        $credentials = request(['email', 'password']);
+        $credentials = $request->validate([
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
+        ]);
 
         if(! $token = auth()->guard('student-api')->attempt($credentials)){
             return response()->json(['error' => 'Unauthorized'], 401);

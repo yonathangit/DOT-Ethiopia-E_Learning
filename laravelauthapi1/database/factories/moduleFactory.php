@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\Course;
 
 
  
@@ -17,8 +17,10 @@ class ModuleFactory extends Factory
     public function definition()
     {
         return [
+           'course_id' =>  Course::all()->random()->id,
            'name' => $this->faker->name,
-           'notes' => 'abebe beso bela chala chube chebete!'
+           'notes' => $this->faker->text,
+           'youtube url' =>$this->faker->url
         ];
     }
 }

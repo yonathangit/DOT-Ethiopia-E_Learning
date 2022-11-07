@@ -22,7 +22,12 @@ class ModulesResource extends JsonResource
                 'notes' => $this->notes,
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at
-        ]
+            ],
+            'relationships' => [
+                'id' => (string) $this->course->id,
+                'course name' => $this->course->title,
+                'course description' => $this->course->description 
+            ]
         ];
     }
 }

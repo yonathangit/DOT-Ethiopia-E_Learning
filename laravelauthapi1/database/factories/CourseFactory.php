@@ -18,7 +18,7 @@ class CourseFactory extends Factory
     {
         return [
             'title' => $this->faker->randomElement(['Startup Training', 'Reach Up', 'Women Empowerment']),
-            'description' => 'This course is about upgrading your innovative and social skills'
+            'description' => $this->faker->text,
         ];
     }
 }

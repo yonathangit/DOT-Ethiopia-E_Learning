@@ -1,21 +1,44 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\User;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 // use App\Http\Requests\StudentsRequest;
 // use App\Http\Resources\StudentsResource;
 
 class InstructorsController extends Controller
 {
     public function instructorregister(Request $request){
+        $request->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:instructors'],
+            'password' => ['required', 'confirmed', Password::defaults()],
+            'grandfathername' => ['string'],
+            'gender' => ['string'],
+            'level_of_study' => ['string'],
+            'field_of_study' => ['string'],
+            'address' => ['string'],
+            'country' => ['string'],
+            'city' => ['string'],
+            'area_of_expertise' => ['string'],
+            'description' => ['string'],
+        ]);
         $instructor = Instructor::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
+            'grandfathername' => $request->grandfathername,
+            'gender' => $request->gender,
+            'level_of_study' => $request->level_of_study,
+            'field_of_study' => $request->field_of_study,
+            'address' => $request->address,
+            'country' => $request->country,
+            'city' => $request->city,
             'area_of_expertise' => $request->area_of_expertise,
+            'description' => $request->description,
             'email' => $request->email,
             'password' => Hash::make($request->password),
 
@@ -25,7 +48,7 @@ class InstructorsController extends Controller
 
         if($instructor){
             return response()->json([
-                $instructor, 'status'=>true
+                'data' => $instructor, 'status'=>true
             ]);  
         }else{
             return response()->json(['status'=>false]);

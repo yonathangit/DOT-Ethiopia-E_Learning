@@ -13,7 +13,22 @@ class Instructor extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'firstname',
+        'lastname',
+        'grandfathername',
+        'gender',
+        'level_of_study',
+        'field_of_study',
+        'address',
+        'country',
+        'city',
+        'area_of_expertise' ,
+        'description',
+        'email',
+        'password',
+
+    ];
 
     public function users() {
         return $this->morphOne(User::class, 'userable');

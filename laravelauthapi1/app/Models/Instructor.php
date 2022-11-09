@@ -33,6 +33,10 @@ class Instructor extends Authenticatable implements JWTSubject
     public function users() {
         return $this->morphOne(User::class, 'userable');
     }
+
+    public function courses(){
+        return $this->hasMany(Course::class);
+    }
     
     public function getJWTIdentifier()
     {

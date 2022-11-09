@@ -26,7 +26,12 @@ class EnrollmentController extends Controller
          $student->courses()->attach($course->id, [
             'status' => \App\Enum\CourseEnrollEnum::ACTIVE
        ]);
-          return response()->json("success");
+          return response()->json([
+            "student name" => $student->firstname,
+            "student ID" => $student->id,
+            "Course Name" => $course->title,
+            "Course ID" => $course->id
+          ]);
     
     }
       

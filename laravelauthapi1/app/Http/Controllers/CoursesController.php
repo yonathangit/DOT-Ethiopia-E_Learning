@@ -16,23 +16,38 @@ class CoursesController extends Controller
     }
 
     public function update(Request $request, Course $course){
-        $course->update([
-            'title' => $request->input('title')
+        $data = $request->validate([
+            'title' => 'required',
+            'description' => 'required',   
         ]);
 
-        return new CoursesResource($course);
+        $instructor = auth()->guard('instructor-api')->user();
+       $newdata = $instructor->courses()->update($data);
+
+        return new CoursesResource($newdata);
     }
     public function store(Request $request){
-       $course = Course::create([
-         'title' => $request->title, 
-         'description' => $request->description
-       ]);
+        $data = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+           
+        ]);
+
+        $instructor = auth()->guard('instructor-api')->user();
+       $newdata = $instructor->courses()->create($data);
+        
+    //    $course = Course::create([
+    //      'title' => $request->title, 
+    //      'description' => $request->description
+    //    ]);
        
-       return new CoursesResource($course);
+       return new CoursesResource($newdata);
         
     }
     public function destroy(Course $course){
         $course->delete();
-        return response(null, 204); 
+        return response->json([
+            "status" => "Course Deleted"
+        ], 204); 
     }
 }

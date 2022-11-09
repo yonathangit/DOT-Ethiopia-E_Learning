@@ -23,7 +23,7 @@ Route::get('/courses/{course}', [CoursesController::class, 'show']);
 Route::post('enroll/{course}', [EnrollmentController::class, 'store']);
 Route::apiResource('/students', StudentsController::class);
 Route::apiResource('/instructors', StudentsController::class);
-Route::apiResource('/courses', CoursesController::class);
+
 
 
 Route::post('adminregister', [AdminController::class, 'adminregister'])->name('adminregister');
@@ -64,7 +64,8 @@ Route::group([
     
 
 ], function () {
-   
+    Route::post('courses', [CoursesController::class, 'store']);
+    Route::post('courses/{course}', [CoursesController::class, 'update']);
     Route::post('instructorlogout', [InstructorsController::class, 'instructorlogout'])->name('instructorlogout');
     Route::post('instructorme', [InstructorsController::class, 'me']);
     Route::post('/courses/{course}/modules', [ModulesController::class, 'store']);

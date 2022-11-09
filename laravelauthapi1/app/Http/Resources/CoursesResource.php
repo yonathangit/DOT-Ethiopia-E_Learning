@@ -16,12 +16,13 @@ class CoursesResource extends JsonResource
     {
         return[
             'id' => (string)$this->id,
-               'type' => 'Courses',
-               'attributes' => [
-                 'title' => $this->title,
-                 'created_at' => $this->created_at,
-                 'updated_at' => $this->updated_at
-        ]
-               ];
+            'type' => 'Courses',
+            'title' => $this->title,
+            'description' =>$this->description,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'instructor firstname' => $this->instructor->firstname,
+            'instructor lastname' => $this->instructor->lastname
+        ];
     }
 }

@@ -19,11 +19,12 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('title');
             $table->longText('description');
-            $table->longText('about_instructor')->nullable();
+            $table->unsignedInteger('instructor_id');
             $table->integer('view_count')->default(0);
             $table->integer('subscriber_count')->default(0);
             $table->string('status')->default(0);
             $table->softDeletes();
+            $table->index('instructor_id'); 
             $table->foreign('category_id') ->references('id') ->on('categories') ->onDelete('cascade');
             $table->timestamps();
         });

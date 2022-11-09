@@ -9,19 +9,7 @@ class Course extends Model
 {
     use HasFactory;
     protected $table = 'courses';
-    protected $fillable = [
-        'title',
-        'description',
-        'photo',
-        'category_id',
-        'about_instructor',
-        'view_count',
-        'subscriber_count',
-        'status',
-        'created_at',
-        'deleted_at',
-        'updated_at'
-    ];
+    protected $guarded = "";
 
     public function modules()
     {
@@ -32,5 +20,8 @@ class Course extends Model
         return $this->belongsToMany(Student::class, 'course_student', 'course_id', 'student_id')
                     ->withPivot('status')
                     ->withTimestamps();
+    }
+    public function instructor(){
+        return $this->belongsTo(Instructor::class);
     }
 }

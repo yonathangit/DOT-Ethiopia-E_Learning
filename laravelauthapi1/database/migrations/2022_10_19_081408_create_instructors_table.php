@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->date('date_of_birth')->nullable(); 
             $table->bigInteger('phone_number')->nullable();
+            $table->unsignedInteger('course_id')->nullable();
+            $table->foreign('course_id') ->references('id') ->on('courses') ->onDelete('cascade');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 // use App\Http\Requests\StudentsRequest;
-// use App\Http\Resources\StudentsResource;
+use App\Http\Resources\InstructorsResource;
 
 class InstructorsController extends Controller
 {
@@ -95,11 +95,11 @@ class InstructorsController extends Controller
        // return new StudentsResource($student);
     }
     public function show(Instructor $instructor){
-        //return new StudentsResource($student);
+        return new InstructorsResource($instructor);
     }
 
     public function index(){
-       //return StudentsResource::collection(Student::all()); 
+       return InstructorsResource::collection(Instructor::all()); 
     }
 
     public function destroy(Instructor $instructor){

@@ -22,7 +22,8 @@ Route::group(['middleware'=>'api'],function(){
 Route::get('/courses/{course}', [CoursesController::class, 'show']);
 Route::post('enroll/{course}', [EnrollmentController::class, 'store']);
 Route::apiResource('/students', StudentsController::class);
-Route::apiResource('/instructors', StudentsController::class);
+Route::get('/instructors', [InstructorsController::Class, 'index']);
+Route::get('/instructors/{instructor}', [InstructorsController::class, 'show']);
 
 
 
@@ -34,6 +35,7 @@ Route::post('instructorregister', [InstructorsController::class, 'instructorregi
 Route::post('instructorlog', [InstructorsController::class, 'instructorlog'])->name('instructorlog');
 Route::get('courses', [CoursesController::class, 'index']);
 Route::get('courses/{course}', [CoursesController::class, 'show']);
+
 
 Route::group([
 
@@ -66,7 +68,8 @@ Route::group([
 
 ], function () {
     Route::post('courses', [CoursesController::class, 'store']);
-    Route::post('courses/{course}', [CoursesController::class, 'update']);
+    Route::patch('courses/{course}', [CoursesController::class, 'update']);
+    Route::delete('courses/{course}', [CoursesController::class, 'destroy']);
     Route::post('instructorlogout', [InstructorsController::class, 'instructorlogout'])->name('instructorlogout');
     Route::post('instructorme', [InstructorsController::class, 'me']);
     Route::post('/courses/{course}/modules', [ModulesController::class, 'store']);

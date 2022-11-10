@@ -15,16 +15,16 @@ class CoursesController extends Controller
        return new CoursesResource($course);
     }
 
-    public function update(Request $request, Course $course){
-        $data = $request->validate([
+    public function update(Course $course){
+        $data = request()->validate([
             'title' => 'required',
             'description' => 'required',   
         ]);
 
         $instructor = auth()->guard('instructor-api')->user();
-       $newdata = $instructor->courses()->update($data);
+       $updatedData = $instructor->courses()->update($data);
 
-        return new CoursesResource($newdata);
+        return new CoursesResource($updatedData);
     }
     public function store(Request $request){
         $data = $request->validate([
@@ -45,7 +45,10 @@ class CoursesController extends Controller
         
     }
     public function destroy(Course $course){
-        $course->delete();
+
+        $instructor = auth()->guard('instructor-api')->user();
+
+        $instructor->courses()->delete($course);
         return response->json([
             "status" => "Course Deleted"
         ], 204); 

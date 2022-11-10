@@ -62,6 +62,10 @@ class CoursesController extends Controller
         
     }
     
+    public function search($name){
+        $courses = Course::where('title', 'like', '%'.$name.'%')->get();
+        return response()->json($courses);
+    }
     public function destroy(Course $course){
        
        return $this->isNotAuthorized($course) ? $this->isNotAuthorized($course) : $course->delete();

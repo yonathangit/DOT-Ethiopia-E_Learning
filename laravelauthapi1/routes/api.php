@@ -34,7 +34,7 @@ Route::post('studentlog', [StudentsController::class, 'studentlog'])->name('stud
 Route::post('instructorregister', [InstructorsController::class, 'instructorregister'])->name('instructorregister');
 Route::post('instructorlog', [InstructorsController::class, 'instructorlog'])->name('instructorlog');
 Route::get('allcourses', [CoursesController::class, 'showToAll']);
-
+Route::get('search/{course}', [CoursesController::Class, 'search']);
 
 Route::group([
 

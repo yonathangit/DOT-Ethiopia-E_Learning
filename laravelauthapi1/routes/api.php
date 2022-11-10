@@ -33,8 +33,7 @@ Route::post('studentregister', [StudentsController::class, 'studentregister'])->
 Route::post('studentlog', [StudentsController::class, 'studentlog'])->name('studentlog');
 Route::post('instructorregister', [InstructorsController::class, 'instructorregister'])->name('instructorregister');
 Route::post('instructorlog', [InstructorsController::class, 'instructorlog'])->name('instructorlog');
-Route::get('courses', [CoursesController::class, 'index']);
-Route::get('courses/{course}', [CoursesController::class, 'show']);
+
 
 
 Route::group([
@@ -67,11 +66,13 @@ Route::group([
     
 
 ], function () {
-    Route::post('courses', [CoursesController::class, 'store']);
-    Route::patch('courses/{course}', [CoursesController::class, 'update']);
-    Route::delete('courses/{course}', [CoursesController::class, 'destroy']);
     Route::post('instructorlogout', [InstructorsController::class, 'instructorlogout'])->name('instructorlogout');
     Route::post('instructorme', [InstructorsController::class, 'me']);
+    Route::post('courses', [CoursesController::class, 'store']);
+    Route::get('courses', [CoursesController::class, 'index']);
+    Route::get('courses/{course}', [CoursesController::class, 'show']);
+    Route::patch('courses/{course}', [CoursesController::class, 'update']);
+    Route::delete('courses/{course}', [CoursesController::class, 'destroy']);
     Route::post('/courses/{course}/modules', [ModulesController::class, 'store']);
     Route::get('/courses/{course}/modules', [ModulesController::class, 'index']);
     Route::patch('/courses/{course}/modules/{module}', [ModulesController::class, 'update']);

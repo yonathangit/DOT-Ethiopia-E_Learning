@@ -9,7 +9,11 @@ class Course extends Model
 {
     use HasFactory;
     protected $table = 'courses';
-    protected $guarded = "";
+    protected $fillable = [
+        "title",
+        "description",
+        "instructor_id"
+    ];
 
     public function modules()
     {

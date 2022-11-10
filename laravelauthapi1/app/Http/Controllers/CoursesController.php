@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CoursesRequest;
 use App\Http\Resources\CoursesResource;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\DB;
 class CoursesController extends Controller
 {
     use HttpResponses;
@@ -36,20 +37,31 @@ class CoursesController extends Controller
         $request->validated($request->all());
 
         $instructor = auth()->guard('instructor-api')->user();
-       $newdata = $instructor->courses()->create([
-          'instructor_id' => $instructor->id,
-          'title' => $request->title,
-          'description' => $request->description
-       ]);
+        if($request->has('photo')){
+            $photo = $request->file('photo');
+            $name = time().'.'.$photo->getClientOriginalExtension();
+            $photo->move('photos/',$name);
+            $newdata = $instructor->courses()->create([
+                'instructor_id' => $instructor->id,
+                'title' => $request->title,
+                'description' => $request->description,
+                'photo' => $name
+             ]);
+             return new CoursesResource($newdata);
+        }
+
+        return response()->json('Please Try Again!');
+        
         
     //    $course = Course::create([
     //      'title' => $request->title, 
     //      'description' => $request->description
     //    ]);
        
-       return new CoursesResource($newdata);
+      
         
     }
+    
     public function destroy(Course $course){
        
        return $this->isNotAuthorized($course) ? $this->isNotAuthorized($course) : $course->delete();

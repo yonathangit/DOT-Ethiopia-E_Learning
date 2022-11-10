@@ -29,6 +29,9 @@ class CoursesController extends Controller
 
         return new CoursesResource($course);
     }
+    public function showToAll(){
+        return CoursesResource::collection(Course::all());
+    }
     public function store(CoursesRequest $request){
         $request->validated($request->all());
 

@@ -33,7 +33,7 @@ Route::post('studentregister', [StudentsController::class, 'studentregister'])->
 Route::post('studentlog', [StudentsController::class, 'studentlog'])->name('studentlog');
 Route::post('instructorregister', [InstructorsController::class, 'instructorregister'])->name('instructorregister');
 Route::post('instructorlog', [InstructorsController::class, 'instructorlog'])->name('instructorlog');
-
+Route::get('allcourses', [CoursesController::class, 'showToAll']);
 
 
 Route::group([

@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Instructor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +17,7 @@ class CourseFactory extends Factory
     public function definition()
     {
         return [
+            'instructor_id' => Instructor::all()->random()->id,
             'title' => $this->faker->randomElement(['Startup Training', 'Reach Up', 'Women Empowerment']),
             'description' => $this->faker->text,
         ];

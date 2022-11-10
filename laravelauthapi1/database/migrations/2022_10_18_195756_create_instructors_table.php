@@ -20,14 +20,14 @@ return new class extends Migration
             $table->string('grandfathername');
             $table->string('area_of_expertise')->nullable();
             $table->string('gender')->default('male');
-            $table->string('level_of_study'); 
+            $table->string('level_of_study')->nullable(); 
             $table->string('field_of_study');
             $table->string('address')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('description')->nullable();
             $table->date('date_of_birth')->nullable(); 
-            $table->bigInteger('phone_number')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

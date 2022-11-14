@@ -40,7 +40,7 @@ class CoursesController extends Controller
         if($request->has('photo')){
             $photo = $request->file('photo');
             $name = time().'.'.$photo->getClientOriginalExtension();
-            $photo->move('photos/',$name);
+            $photo->move('photos/courses/',$name);
             $newdata = $instructor->courses()->create([
                 'instructor_id' => $instructor->id,
                 'title' => $request->title,

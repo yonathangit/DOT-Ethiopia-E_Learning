@@ -14,12 +14,21 @@ class ModulesController extends Controller
         if(auth()->guard('instructor-api')->user()->id !== $course->instructor_id){
             return $this->error('', 'You are not authorized to make this request', 403);
          }
-       $module = $course->modules()->create([
-            'name' => $request->name,
-            'notes' => $request->notes
-        ]);
-    
-           return new ModulesResource($module);
+         if($request->has('photo')){
+            $photo = $request->file('photo');
+            $name = time().'.'.$photo->getClientOriginalExtension();
+            $photo->move('photos/modules/',$name);
+            $module = $course->modules()->create([
+                'course_id' => $course->id,
+                'pictures' => $name,
+                'name' => $request->name,
+                'notes' => $request->notes
+            ]);
+        
+               return new ModulesResource($module);
+        }
+        return response()->json('Please Try Again!');
+       
     }
     public function update (Request $request, Course $course, Module $module){
         if(auth()->guard('instructor-api')->user()->id !== $course->instructor_id){

@@ -13,7 +13,7 @@ class Module extends Model
     protected $fillable = [
         'course_id',
         'pictures',
-        'youtube url',
+        'youtube_url',
         'name',
         'notes'
     ];

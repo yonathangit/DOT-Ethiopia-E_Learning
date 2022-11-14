@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('course_id')->nullable();
             $table->string('name');
-            $table->string('youtube url')->nullable();
+            $table->string('youtube_url')->nullable();
             $table->string('notes')->nullable();
             $table->string('pictures')->nullable();
             $table->foreign('course_id') ->references('id') ->on('courses') ->onDelete('cascade');

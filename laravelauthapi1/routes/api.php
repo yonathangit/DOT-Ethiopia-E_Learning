@@ -50,13 +50,15 @@ Route::group([
 
 Route::group([
 
-    'middleware' => 'auth:admin-api',
+   // 'middleware' => 'auth:admin-api',
     
 
 ], function () {
    
     Route::post('adminlogout', [AdminController::class, 'adminlogout'])->name('adminlogout');
     Route::post('adminme', [AdminController::class, 'me']);
+    Route::post('instructorregister', [InstructorsController::class, 'instructorregister'])->name('instructorregister');
+    Route::get('instructorlist', [InstructorsController::class, 'index']);
 
 });
 

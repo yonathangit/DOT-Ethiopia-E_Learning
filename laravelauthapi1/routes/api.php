@@ -58,7 +58,9 @@ Route::group([
     Route::post('adminlogout', [AdminController::class, 'adminlogout'])->name('adminlogout');
     Route::post('adminme', [AdminController::class, 'me']);
     Route::post('instructorregister', [InstructorsController::class, 'instructorregister'])->name('instructorregister');
-    Route::get('instructorlist', [InstructorsController::class, 'index']);
+    Route::get('instructors', [InstructorsController::class, 'index']);
+    Route::delete('instructordelete/{instructor}', [InstructorsController::class, 'destroy']);
+    Route::put('instructor/{instructor}', [InstructorsController::class, 'update']);
 
 });
 

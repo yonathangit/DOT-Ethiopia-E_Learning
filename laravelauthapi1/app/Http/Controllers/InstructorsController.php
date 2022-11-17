@@ -85,14 +85,21 @@ class InstructorsController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    public function update ($request, Instructor $instructor){
+    public function update (Request $request, Instructor $instructor){
         $instructor->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
-            'email' => $request->email  
+            'gender' => $request->gender,
+            'level_of_study' => $request->level_of_study,
+            'address' => $request->address,
+            'country' => $request->country,
+            'city' => $request->city,
+            'area_of_expertise' => $request->area_of_expertise,
+            'description' => $request->description,
+            'email' => $request->email, 
         ]);
        
-       // return new StudentsResource($student);
+        return new InstructorsResource($instructor);
     }
     public function show(Instructor $instructor){
         return new InstructorsResource($instructor);
@@ -103,7 +110,7 @@ class InstructorsController extends Controller
     }
 
     public function destroy(Instructor $instructor){
-        $instructor->delete();
-        return response(null, 204);
+        
+        return $instructor->delete();;
     }
 }
